@@ -1,78 +1,67 @@
-body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI";
-    background: #0b0b0b;
-    color: #eaeaea;
+body{
+    background:#000;
+    color:#e5e5e5;
+    font-family:monospace;
+    margin:0;
 }
 
-.container {
-    max-width: 1000px;
-    margin: auto;
-    padding: 40px 20px;
+.container{
+    max-width:900px;
+    margin:auto;
+    padding:40px;
 }
 
-/* HERO */
-header h1 {
-    font-size: 36px;
+.hero h1{
+    font-size:40px;
+    letter-spacing:2px;
 }
 
-.tagline {
-    color: #888;
+.tag{
+    color:#888;
 }
 
-.intro {
-    margin: 20px 0;
-    color: #bbb;
+.intro{
+    margin:20px 0;
 }
 
-.links a {
-    margin-right: 15px;
-    color: #4da3ff;
-    text-decoration: none;
+.links a{
+    margin-right:15px;
+    color:#4da3ff;
+    text-decoration:none;
 }
 
-/* GRID */
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
+.section{
+    margin-top:60px;
 }
 
-/* CARD */
-.card {
-    background: #141414;
-    padding: 20px;
-    border-radius: 10px;
-    transition: 0.2s;
+.card{
+    padding:10px;
+    border:1px solid #333;
+    margin-bottom:10px;
+    cursor:pointer;
 }
 
-.card:hover {
-    transform: translateY(-5px);
-    background: #1c1c1c;
+.card:hover{
+    background:#111;
 }
 
-.card a {
-    color: #4da3ff;
+.content{
+    display:none;
+    padding:10px;
+    border-left:2px solid #4da3ff;
+    margin-bottom:20px;
 }
 
-/* RESEARCH */
-.highlight {
-    background: #111;
-    padding: 25px;
-    border-left: 3px solid #4da3ff;
+.highlight{
+    padding:15px;
+    border-left:3px solid #4da3ff;
 }
 
-/* TIMELINE */
-.timeline .item {
-    margin-bottom: 20px;
+.note{
+    color:#aaa;
+    margin-bottom:10px;
 }
 
-/* SECTIONS */
-section {
-    margin-top: 60px;
-}
-
-footer {
-    margin-top: 80px;
-    color: #666;
+.line{
+    margin-bottom:5px;
 }
