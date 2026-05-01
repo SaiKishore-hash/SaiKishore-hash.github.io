@@ -1,52 +1,90 @@
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
-    background-color: #f9fafb;
     margin: 0;
-    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
+    background: #ffffff;
+    color: #111;
 }
 
-.container {
-    max-width: 800px;
+/* NAVBAR */
+nav {
+    border-bottom: 1px solid #eee;
+}
+
+.nav-container {
+    max-width: 900px;
     margin: auto;
-    padding: 50px 20px;
-    background: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-h1 {
-    font-size: 32px;
-    margin-bottom: 5px;
+.nav-links a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #555;
 }
 
-.subtitle {
-    color: #666;
-    margin-bottom: 30px;
+.nav-links a:hover {
+    color: black;
+}
+
+/* MAIN */
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 40px 20px;
+}
+
+/* HERO */
+.hero h1 {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    font-size: 18px;
+    color: #555;
+}
+
+/* SECTIONS */
+section {
+    margin-top: 60px;
 }
 
 h2 {
-    margin-top: 40px;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 5px;
+    margin-bottom: 20px;
 }
 
-.project {
-    margin-top: 20px;
+/* CARDS */
+.card {
+    border: 1px solid #eee;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
 }
 
-.project a {
-    font-size: 14px;
+.card a {
     display: inline-block;
-    margin-top: 5px;
-}
-
-ul {
-    padding-left: 20px;
-}
-
-a {
+    margin-top: 10px;
     color: #2563eb;
     text-decoration: none;
 }
 
-a:hover {
+.card a:hover {
+    text-decoration: underline;
+}
+
+/* LINKS */
+.links li {
+    margin-bottom: 10px;
+}
+
+.links a {
+    color: #2563eb;
+    text-decoration: none;
+}
+
+.links a:hover {
     text-decoration: underline;
 }

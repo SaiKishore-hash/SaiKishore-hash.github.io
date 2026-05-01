@@ -6,7 +6,6 @@
     <title>Execution System</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <div class="container">
@@ -14,49 +13,30 @@
 <h1>How I Built a Trading Execution System</h1>
 
 <p>
-This project started as an attempt to understand how orders are processed and executed in trading systems. 
-Instead of focusing on theory, I wanted to simulate how orders flow through a system and how matching actually works.
+This project helped me understand how orders flow through trading systems
+and how matching logic works in practice.
 </p>
 
 <h2>Problem</h2>
-
 <p>
-The goal was to design a simplified system where buy and sell orders could be processed and matched.
-I wanted to understand how systems handle order priority, partial fills, and consistency.
+I wanted to simulate how buy and sell orders interact and how systems
+handle execution and priority.
 </p>
 
 <h2>Design</h2>
-
 <p>
-The system takes in orders and stores them in separate structures for buys and sells.  
-Orders are matched based on price and arrival priority.
-</p>
-
-<p>
-If a match is found, the system executes the trade and updates the remaining quantity.
-If not, the order is stored until a matching order arrives.
-</p>
-
-<h2>Challenges</h2>
-
-<p>
-One of the main challenges was handling partial matches correctly.  
-Another challenge was ensuring that the system always processes orders in the correct priority order.
+Orders were processed and matched based on price and time priority.
+Unmatched orders were stored for future matching.
 </p>
 
 <h2>Learnings</h2>
-
 <p>
-This project helped me understand that trading systems are less about complex algorithms and more about handling edge cases and ensuring consistency.
-</p>
-
-<p>
-It also made me appreciate how important latency and system design are in real-world trading environments.
+I learned that real systems are less about algorithms and more about
+handling edge cases and maintaining consistency.
 </p>
 
 <br>
-
-<a href="index.html">← Back to Home</a>
+<a href="index.html">← Back</a>
 
 </div>
 
