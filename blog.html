@@ -1,41 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Execution System</title>
-    <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <div class="container">
 
-<h1>How I Built a Trading Execution System</h1>
+<h1>How Order Matching Engines Work</h1>
 
 <p>
-This project helped me understand how orders flow through trading systems
-and how matching logic works in practice.
+An order matching engine is the core of any exchange. It determines how buy and sell orders interact.
 </p>
 
-<h2>Problem</h2>
+<h2>Core Idea</h2>
 <p>
-I wanted to simulate how buy and sell orders interact and how systems
-handle execution and priority.
+Orders are stored in an order book and matched using price-time priority.
+Higher bids and lower asks are matched first.
 </p>
 
-<h2>Design</h2>
+<h2>Challenges</h2>
 <p>
-Orders were processed and matched based on price and time priority.
-Unmatched orders were stored for future matching.
+Handling partial fills, maintaining latency constraints, and ensuring fairness are key system challenges.
 </p>
 
-<h2>Learnings</h2>
+<h2>Why It Matters</h2>
 <p>
-I learned that real systems are less about algorithms and more about
-handling edge cases and maintaining consistency.
+In real markets, matching engines operate under extreme latency constraints and must process millions of orders efficiently.
 </p>
 
-<br>
 <a href="index.html">← Back</a>
 
 </div>

@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sai Kishore</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sai Kishore</title>
+<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <nav>
     <div class="nav-container">
-        <h2>Sai Kishore</h2>
+        <div class="logo">Sai Kishore</div>
         <div class="nav-links">
             <a href="#work">Work</a>
+            <a href="#projects">Projects</a>
             <a href="#writing">Writing</a>
             <a href="#experience">Experience</a>
-            <a href="resume.pdf">Resume</a>
+            <a href="resume.pdf" target="_blank">Resume</a>
         </div>
     </div>
 </nav>
@@ -23,54 +25,100 @@
 <div class="container">
 
 <section class="hero">
-    <h1>Systems. Trading. Data.</h1>
+    <h1>Quantitative Systems Engineer</h1>
     <p>
-        I build systems around trading, data pipelines, and real-time workflows.
-        Interested in quantitative research and systems engineering.
+        I build trading systems, low-latency infrastructure, and data-driven decision engines.
+        My work sits at the intersection of quantitative research, systems engineering, and financial markets.
     </p>
 </section>
 
 <section id="work">
-    <h2>Selected Work</h2>
+    <h2>Highlighted Work</h2>
 
     <div class="card">
-        <h3>Execution System</h3>
+        <h3>Quant Research Station</h3>
         <p>
-            Built a trading execution system to understand order flow,
-            matching logic, and latency considerations.
+            Multi-agent system for autonomous alpha discovery using Llama-3.3.
+            Converts natural language investment ideas into real-time Sharpe ratio evaluations with confidence metrics.
         </p>
-        <a href="https://github.com/" target="_blank">View Code →</a>
+        <a href="https://quant-reseach-station.streamlit.app" target="_blank">Run Agent →</a>
     </div>
 
     <div class="card">
-        <h3>Resume Optimizer</h3>
+        <h3>BayesFX Agent</h3>
         <p>
-            Built a system to adapt resumes dynamically to job descriptions.
+            Bayesian inference engine for FX markets modeling expected returns, volatility, and tail risk.
+            Uses probabilistic decision frameworks across market regimes.
         </p>
-        <a href="https://github.com/" target="_blank">View Code →</a>
+        <a href="https://bayesfx-agent.streamlit.app" target="_blank">Run Agent →</a>
+    </div>
+</section>
+
+<section id="projects">
+    <h2>Systems Projects</h2>
+
+    <div class="card">
+        <h3>Order Matching Engine (C++)</h3>
+        <p>
+            Built a trading backend implementing price-time priority with in-memory order books,
+            partial fills, and real-time trade execution.
+        </p>
+        <a href="https://github.com/SaiKishore-hash/ordermatchingengine" target="_blank">View Code →</a>
+    </div>
+
+    <div class="card">
+        <h3>Asynchronous Job System (C++)</h3>
+        <p>
+            Multi-threaded job processing system using thread pools, mutexes, and condition variables
+            to simulate production-scale concurrency workloads.
+        </p>
+        <a href="https://github.com/SaiKishore-hash/async-job-system-cpp" target="_blank">View Code →</a>
+    </div>
+
+    <div class="card">
+        <h3>Drowsy Driver Detection System</h3>
+        <p>
+            Computer vision-based system published in Springer.
+            Detects driver fatigue in real time using IoT + ML pipelines.
+        </p>
+        <a href="https://link.springer.com/chapter/10.1007/978-981-99-6984-5_32" target="_blank">View Paper →</a>
     </div>
 </section>
 
 <section id="writing">
     <h2>Writing</h2>
-
-    <ul class="links">
-        <li><a href="blog.html">How I Built a Trading Execution System</a></li>
+    <ul>
+        <li><a href="blog.html">How Order Matching Engines Work</a></li>
     </ul>
 </section>
 
 <section id="experience">
     <h2>Experience</h2>
 
-    <p>
-        <strong>ION Group</strong> — Worked on FX trading systems, focusing on
-        data flow, debugging production issues, and system behavior.
-    </p>
+    <div class="exp">
+        <h3>ION Group — Product Engineer</h3>
+        <p>
+            Built low-latency trading connectivity across 40+ financial institutions.
+            Designed APIs for market data, implemented FIX/SBE gateways, and reduced release cycles by 30%.
+        </p>
+    </div>
+
+    <div class="exp">
+        <h3>ION Group — Trading Operations Analyst</h3>
+        <p>
+            Automated trading workflows, reduced operational time by 75%, and built NLP-based incident resolution tools.
+            Led production debugging and regulatory workflow delivery across global banks.
+        </p>
+    </div>
 </section>
 
-<section>
+<section class="contact">
     <h2>Contact</h2>
-    <p>Email: your@email.com</p>
+    <p>Email: sai.kishore.atreya@gmail.com</p>
+    <p>
+        <a href="https://github.com/SaiKishore-hash" target="_blank">GitHub</a> |
+        <a href="https://www.linkedin.com/in/saikishore-0308/" target="_blank">LinkedIn</a>
+    </p>
 </section>
 
 </div>

@@ -5,18 +5,16 @@ body {
     color: #111;
 }
 
-/* NAVBAR */
 nav {
     border-bottom: 1px solid #eee;
 }
 
 .nav-container {
-    max-width: 900px;
+    max-width: 1000px;
     margin: auto;
     padding: 20px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
 }
 
 .nav-links a {
@@ -29,34 +27,25 @@ nav {
     color: black;
 }
 
-/* MAIN */
 .container {
-    max-width: 900px;
+    max-width: 1000px;
     margin: auto;
     padding: 40px 20px;
 }
 
-/* HERO */
 .hero h1 {
-    font-size: 40px;
-    margin-bottom: 10px;
+    font-size: 42px;
 }
 
 .hero p {
-    font-size: 18px;
     color: #555;
+    font-size: 18px;
 }
 
-/* SECTIONS */
 section {
     margin-top: 60px;
 }
 
-h2 {
-    margin-bottom: 20px;
-}
-
-/* CARDS */
 .card {
     border: 1px solid #eee;
     padding: 20px;
@@ -65,8 +54,6 @@ h2 {
 }
 
 .card a {
-    display: inline-block;
-    margin-top: 10px;
     color: #2563eb;
     text-decoration: none;
 }
@@ -75,16 +62,11 @@ h2 {
     text-decoration: underline;
 }
 
-/* LINKS */
-.links li {
-    margin-bottom: 10px;
+.exp {
+    margin-bottom: 20px;
 }
 
-.links a {
+.contact a {
     color: #2563eb;
     text-decoration: none;
-}
-
-.links a:hover {
-    text-decoration: underline;
 }
