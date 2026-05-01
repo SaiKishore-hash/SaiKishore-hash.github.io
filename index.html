@@ -13,13 +13,12 @@
 
 <header>
     <h1>Mantripragada Sai Kishore Atreya</h1>
-    <p class="tagline">
-        Systems Engineering • Quantitative Modeling • Trading Infrastructure
-    </p>
+    <p class="tagline">Quant Systems • Trading Infrastructure • Low Latency Engineering</p>
+
     <p class="intro">
-        I build systems that operate under constraints — latency, uncertainty, and scale.
-        My work spans low-latency trading infrastructure, probabilistic decision systems,
-        and execution engines designed to simulate real market behavior.
+        I build systems that operate under real constraints — latency, uncertainty, and scale.
+        My work focuses on trading infrastructure, probabilistic modeling, and execution systems
+        that simulate real market behavior.
     </p>
 
     <div class="links">
@@ -30,109 +29,77 @@
 </header>
 
 <section>
-    <h2>Systems & Research Work</h2>
+<h2>Systems & Research</h2>
 
-    <div class="block">
-        <h3>Quant Research Station — Autonomous Alpha Discovery</h3>
-        <p>
-        Designed a multi-agent system that translates natural language investment hypotheses
-        into executable quantitative strategies. The system integrates Llama-3.3 via Groq to
-        perform sub-second inference, generating real-time Sharpe ratios and variance-based
-        confidence metrics.
-        </p>
-        <p>
-        The core challenge was bridging unstructured inputs with structured quantitative models.
-        This required designing a pipeline that maintains consistency across probabilistic outputs
-        while remaining responsive enough for interactive usage.
-        </p>
-        <a href="https://quant-reseach-station.streamlit.app" target="_blank">Run System →</a>
-    </div>
+<div class="block">
+<h3>Quant Research Station</h3>
+<p>
+A multi-agent system that translates natural language investment ideas into executable quantitative strategies.
+Uses Llama-3.3 with sub-second inference to compute real-time Sharpe ratios and variance-based confidence.
+</p>
+<a href="https://quant-reseach-station.streamlit.app" target="_blank">Run →</a>
+</div>
 
-    <div class="block">
-        <h3>BayesFX Agent — Probabilistic FX Decision Engine</h3>
-        <p>
-        Built a Bayesian inference framework to model FX markets through probabilistic distributions
-        of returns, volatility, and tail risk. The system evaluates directional confidence and adapts
-        decisions across changing market regimes.
-        </p>
-        <p>
-        Instead of deterministic predictions, the system focuses on uncertainty modeling — enabling
-        decisions that reflect confidence intervals rather than point estimates.
-        </p>
-        <a href="https://bayesfx-agent.streamlit.app" target="_blank">Run System →</a>
-    </div>
+<div class="block">
+<h3>BayesFX Agent</h3>
+<p>
+A probabilistic FX engine modeling returns, volatility, and tail risk using Bayesian inference.
+Focuses on uncertainty-aware decision making instead of deterministic prediction.
+</p>
+<a href="https://bayesfx-agent.streamlit.app" target="_blank">Run →</a>
+</div>
 
-    <div class="block">
-        <h3>Order Matching Engine (C++)</h3>
-        <p>
-        Implemented a trading engine that simulates exchange-level order matching using price-time
-        priority. Maintains an in-memory order book and supports partial fills, multi-order execution,
-        and trade history tracking.
-        </p>
-        <p>
-        The system was designed to explore how real exchanges handle order flow under strict latency
-        constraints, focusing on data structure efficiency and deterministic matching logic.
-        </p>
-        <a href="https://github.com/SaiKishore-hash/ordermatchingengine" target="_blank">View Code →</a>
-    </div>
+<div class="block">
+<h3>Order Matching Engine</h3>
+<p>
+C++ implementation of an exchange-style matching engine using price-time priority.
+Handles partial fills, order prioritization, and deterministic execution logic under latency constraints.
+</p>
+<a href="https://github.com/SaiKishore-hash/ordermatchingengine" target="_blank">Code →</a>
+</div>
 
-    <div class="block">
-        <h3>Asynchronous Job Processing System (C++)</h3>
-        <p>
-        Built a multi-threaded job execution system using a custom thread pool and shared task queue.
-        Implemented synchronization using mutexes and condition variables to ensure safe concurrent execution.
-        </p>
-        <p>
-        The system simulates production-style workloads where tasks must be processed reliably under concurrency,
-        highlighting challenges in scheduling, synchronization, and resource contention.
-        </p>
-        <a href="https://github.com/SaiKishore-hash/async-job-system-cpp" target="_blank">View Code →</a>
-    </div>
+<div class="block">
+<h3>Async Job System</h3>
+<p>
+Multi-threaded execution engine using thread pools and synchronization primitives.
+Simulates production workloads under concurrency constraints.
+</p>
+<a href="https://github.com/SaiKishore-hash/async-job-system-cpp" target="_blank">Code →</a>
+</div>
 
 </section>
 
 <section>
-    <h2>Professional Experience</h2>
+<h2>Experience</h2>
 
-    <div class="block">
-        <h3>ION Group — Product Engineer (FX Front Office)</h3>
-        <p>
-        Built and scaled low-latency market connectivity systems for 40+ global financial institutions.
-        Designed unified APIs for real-time trading, market data, and drop copy workflows.
-        </p>
-        <p>
-        Engineered FIX and SBE-based gateways to support high-frequency data transfer across exchanges.
-        Reduced release cycles by 30% through automated regression systems and improved debugging workflows.
-        </p>
-    </div>
+<div class="block">
+<h3>ION Group — Product Engineer</h3>
+<p>
+Built low-latency connectivity systems across 40+ institutions.
+Designed APIs, FIX/SBE gateways, and reduced release cycles by 30%.
+</p>
+</div>
 
-    <div class="block">
-        <h3>ION Group — Trading Operations Analyst</h3>
-        <p>
-        Automated end-of-day trading workflows, reducing execution time from 2 hours to 30 minutes.
-        Led production issue resolution across global clients, improving turnaround time by 75%.
-        </p>
-        <p>
-        Built an NLP-based semantic search system for incident management, enabling faster root cause
-        identification across large volumes of historical data.
-        </p>
-    </div>
+<div class="block">
+<h3>ION Group — Trading Operations</h3>
+<p>
+Automated workflows, reduced processing time by 75%, and built NLP systems for incident resolution.
+</p>
+</div>
 
 </section>
 
 <section>
-    <h2>Writing</h2>
+<h2>Writing</h2>
 
-    <div class="block">
-        <h3><a href="blog.html">How Order Matching Engines Work</a></h3>
-        <p>
-        A breakdown of how trading systems process order flow, maintain fairness, and operate under latency constraints.
-        </p>
-    </div>
+<div class="block">
+<h3><a href="blog.html">How Matching Engines Actually Work</a></h3>
+</div>
+
 </section>
 
 <footer>
-    <p>© Sai Kishore</p>
+<p>Built for clarity, not decoration.</p>
 </footer>
 
 </div>
