@@ -8,30 +8,27 @@
 
 <div class="container">
 
-<h1>How Matching Engines Actually Work</h1>
+<h1>How Matching Engines Work</h1>
 
 <p>
-Most people think trading systems are about prediction.
-In reality, they are about execution under constraints.
+Matching engines are not about prediction — they are about execution.
 </p>
 
-<h2>Core Mechanism</h2>
+<h2>Mechanism</h2>
 <p>
 Orders are matched using price-time priority.
-Higher bids and lower asks are executed first,
-while maintaining strict ordering guarantees.
+The highest bid meets the lowest ask.
 </p>
 
-<h2>System Reality</h2>
+<h2>Reality</h2>
 <p>
-The challenge is not matching logic — it is doing it fast, consistently,
-and without violating fairness under high throughput.
+The real challenge is handling this under latency constraints,
+high throughput, and edge cases like partial fills.
 </p>
 
-<h2>What I Learned</h2>
+<h2>Takeaway</h2>
 <p>
-Building a matching engine made it clear:
-systems fail at edges, not averages.
+Markets are systems of execution, not intelligence.
 </p>
 
 <a href="index.html">← Back</a>

@@ -11,14 +11,14 @@
 
 <div class="container">
 
+<!-- HERO -->
 <header>
-    <h1>Mantripragada Sai Kishore Atreya</h1>
-    <p class="tagline">Quant Systems • Trading Infrastructure • Low Latency Engineering</p>
+    <h1>Sai Kishore</h1>
+    <p class="tagline">Quant Systems • Trading Infrastructure • C++ Systems</p>
 
     <p class="intro">
-        I build systems that operate under real constraints — latency, uncertainty, and scale.
-        My work focuses on trading infrastructure, probabilistic modeling, and execution systems
-        that simulate real market behavior.
+        I build systems that operate under latency, uncertainty, and scale —
+        from exchange-style execution engines to probabilistic decision systems.
     </p>
 
     <div class="links">
@@ -28,78 +28,92 @@
     </div>
 </header>
 
+<!-- SYSTEMS GRID -->
 <section>
-<h2>Systems & Research</h2>
+<h2>Systems</h2>
 
-<div class="block">
+<div class="grid">
+
+<div class="card">
 <h3>Quant Research Station</h3>
-<p>
-A multi-agent system that translates natural language investment ideas into executable quantitative strategies.
-Uses Llama-3.3 with sub-second inference to compute real-time Sharpe ratios and variance-based confidence.
-</p>
-<a href="https://quant-reseach-station.streamlit.app" target="_blank">Run →</a>
+<p>Multi-agent system translating ideas → Sharpe ratios using LLM + quant models.</p>
+<a href="https://quant-reseach-station.streamlit.app" target="_blank">Launch →</a>
 </div>
 
-<div class="block">
+<div class="card">
 <h3>BayesFX Agent</h3>
-<p>
-A probabilistic FX engine modeling returns, volatility, and tail risk using Bayesian inference.
-Focuses on uncertainty-aware decision making instead of deterministic prediction.
-</p>
-<a href="https://bayesfx-agent.streamlit.app" target="_blank">Run →</a>
+<p>Bayesian FX engine modeling returns, volatility, and tail risk under uncertainty.</p>
+<a href="https://bayesfx-agent.streamlit.app" target="_blank">Launch →</a>
 </div>
 
-<div class="block">
+<div class="card">
 <h3>Order Matching Engine</h3>
-<p>
-C++ implementation of an exchange-style matching engine using price-time priority.
-Handles partial fills, order prioritization, and deterministic execution logic under latency constraints.
-</p>
-<a href="https://github.com/SaiKishore-hash/ordermatchingengine" target="_blank">Code →</a>
+<p>C++ exchange-style engine with price-time priority and partial fills.</p>
+<a href="https://github.com/SaiKishore-hash/ordermatchingengine" target="_blank">View →</a>
 </div>
 
-<div class="block">
+<div class="card">
 <h3>Async Job System</h3>
+<p>Thread pool + task queue system simulating concurrent backend workloads.</p>
+<a href="https://github.com/SaiKishore-hash/async-job-system-cpp" target="_blank">View →</a>
+</div>
+
+</div>
+</section>
+
+<!-- RESEARCH -->
+<section>
+<h2>Research</h2>
+
+<div class="highlight">
+<h3>Drowsy Driver Detection (Springer)</h3>
+
 <p>
-Multi-threaded execution engine using thread pools and synchronization primitives.
-Simulates production workloads under concurrency constraints.
+Published research on real-time driver fatigue detection using IoT and computer vision.
+Presented at an international conference and published in Springer.
 </p>
-<a href="https://github.com/SaiKishore-hash/async-job-system-cpp" target="_blank">Code →</a>
+
+<a href="https://link.springer.com/chapter/10.1007/978-981-99-6984-5_32" target="_blank">
+Read Paper →
+</a>
+
 </div>
 
 </section>
 
+<!-- EXPERIENCE -->
 <section>
 <h2>Experience</h2>
 
-<div class="block">
-<h3>ION Group — Product Engineer</h3>
-<p>
-Built low-latency connectivity systems across 40+ institutions.
-Designed APIs, FIX/SBE gateways, and reduced release cycles by 30%.
-</p>
+<div class="timeline">
+
+<div class="item">
+<h4>ION Group — Product Engineer</h4>
+<p>Low-latency trading systems, FIX/SBE gateways, API design, 40+ institutions.</p>
 </div>
 
-<div class="block">
-<h3>ION Group — Trading Operations</h3>
-<p>
-Automated workflows, reduced processing time by 75%, and built NLP systems for incident resolution.
-</p>
+<div class="item">
+<h4>ION Group — Trading Operations</h4>
+<p>Automation, NLP tooling, workflow optimization, production debugging.</p>
+</div>
+
 </div>
 
 </section>
 
+<!-- WRITING -->
 <section>
 <h2>Writing</h2>
 
-<div class="block">
-<h3><a href="blog.html">How Matching Engines Actually Work</a></h3>
+<div class="card">
+<h3><a href="blog.html">How Matching Engines Work</a></h3>
+<p>Understanding execution systems under latency constraints.</p>
 </div>
 
 </section>
 
 <footer>
-<p>Built for clarity, not decoration.</p>
+<p>Designed as a system, not a document.</p>
 </footer>
 
 </div>
