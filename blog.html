@@ -11,23 +11,26 @@
 <h1>How Order Matching Engines Work</h1>
 
 <p>
-An order matching engine is the core of any exchange. It determines how buy and sell orders interact.
+At the core of every exchange lies a matching engine — a system responsible for processing
+buy and sell orders under strict latency and fairness constraints.
 </p>
 
-<h2>Core Idea</h2>
+<h2>Order Flow</h2>
 <p>
-Orders are stored in an order book and matched using price-time priority.
-Higher bids and lower asks are matched first.
+Orders enter the system and are placed into an order book. The engine matches orders using
+price-time priority, ensuring fairness while maximizing execution efficiency.
 </p>
 
-<h2>Challenges</h2>
+<h2>System Constraints</h2>
 <p>
-Handling partial fills, maintaining latency constraints, and ensuring fairness are key system challenges.
+The challenge is not just matching orders, but doing so under microsecond latency constraints
+while handling high throughput and edge cases like partial fills and cancellations.
 </p>
 
 <h2>Why It Matters</h2>
 <p>
-In real markets, matching engines operate under extreme latency constraints and must process millions of orders efficiently.
+Understanding matching engines reveals how markets function at a structural level —
+from liquidity formation to execution dynamics.
 </p>
 
 <a href="index.html">← Back</a>

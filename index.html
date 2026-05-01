@@ -9,117 +9,131 @@
 
 <body>
 
-<nav>
-    <div class="nav-container">
-        <div class="logo">Sai Kishore</div>
-        <div class="nav-links">
-            <a href="#work">Work</a>
-            <a href="#projects">Projects</a>
-            <a href="#writing">Writing</a>
-            <a href="#experience">Experience</a>
-            <a href="resume.pdf" target="_blank">Resume</a>
-        </div>
-    </div>
-</nav>
-
 <div class="container">
 
-<section class="hero">
-    <h1>Quantitative Systems Engineer</h1>
-    <p>
-        I build trading systems, low-latency infrastructure, and data-driven decision engines.
-        My work sits at the intersection of quantitative research, systems engineering, and financial markets.
+<header>
+    <h1>Mantripragada Sai Kishore Atreya</h1>
+    <p class="tagline">
+        Systems Engineering • Quantitative Modeling • Trading Infrastructure
     </p>
-</section>
+    <p class="intro">
+        I build systems that operate under constraints — latency, uncertainty, and scale.
+        My work spans low-latency trading infrastructure, probabilistic decision systems,
+        and execution engines designed to simulate real market behavior.
+    </p>
 
-<section id="work">
-    <h2>Highlighted Work</h2>
+    <div class="links">
+        <a href="https://github.com/SaiKishore-hash" target="_blank">GitHub</a>
+        <a href="https://www.linkedin.com/in/saikishore-0308/" target="_blank">LinkedIn</a>
+        <a href="mailto:sai.kishore.atreya@gmail.com">Email</a>
+    </div>
+</header>
 
-    <div class="card">
-        <h3>Quant Research Station</h3>
+<section>
+    <h2>Systems & Research Work</h2>
+
+    <div class="block">
+        <h3>Quant Research Station — Autonomous Alpha Discovery</h3>
         <p>
-            Multi-agent system for autonomous alpha discovery using Llama-3.3.
-            Converts natural language investment ideas into real-time Sharpe ratio evaluations with confidence metrics.
+        Designed a multi-agent system that translates natural language investment hypotheses
+        into executable quantitative strategies. The system integrates Llama-3.3 via Groq to
+        perform sub-second inference, generating real-time Sharpe ratios and variance-based
+        confidence metrics.
         </p>
-        <a href="https://quant-reseach-station.streamlit.app" target="_blank">Run Agent →</a>
+        <p>
+        The core challenge was bridging unstructured inputs with structured quantitative models.
+        This required designing a pipeline that maintains consistency across probabilistic outputs
+        while remaining responsive enough for interactive usage.
+        </p>
+        <a href="https://quant-reseach-station.streamlit.app" target="_blank">Run System →</a>
     </div>
 
-    <div class="card">
-        <h3>BayesFX Agent</h3>
+    <div class="block">
+        <h3>BayesFX Agent — Probabilistic FX Decision Engine</h3>
         <p>
-            Bayesian inference engine for FX markets modeling expected returns, volatility, and tail risk.
-            Uses probabilistic decision frameworks across market regimes.
+        Built a Bayesian inference framework to model FX markets through probabilistic distributions
+        of returns, volatility, and tail risk. The system evaluates directional confidence and adapts
+        decisions across changing market regimes.
         </p>
-        <a href="https://bayesfx-agent.streamlit.app" target="_blank">Run Agent →</a>
+        <p>
+        Instead of deterministic predictions, the system focuses on uncertainty modeling — enabling
+        decisions that reflect confidence intervals rather than point estimates.
+        </p>
+        <a href="https://bayesfx-agent.streamlit.app" target="_blank">Run System →</a>
     </div>
-</section>
 
-<section id="projects">
-    <h2>Systems Projects</h2>
-
-    <div class="card">
+    <div class="block">
         <h3>Order Matching Engine (C++)</h3>
         <p>
-            Built a trading backend implementing price-time priority with in-memory order books,
-            partial fills, and real-time trade execution.
+        Implemented a trading engine that simulates exchange-level order matching using price-time
+        priority. Maintains an in-memory order book and supports partial fills, multi-order execution,
+        and trade history tracking.
+        </p>
+        <p>
+        The system was designed to explore how real exchanges handle order flow under strict latency
+        constraints, focusing on data structure efficiency and deterministic matching logic.
         </p>
         <a href="https://github.com/SaiKishore-hash/ordermatchingengine" target="_blank">View Code →</a>
     </div>
 
-    <div class="card">
-        <h3>Asynchronous Job System (C++)</h3>
+    <div class="block">
+        <h3>Asynchronous Job Processing System (C++)</h3>
         <p>
-            Multi-threaded job processing system using thread pools, mutexes, and condition variables
-            to simulate production-scale concurrency workloads.
+        Built a multi-threaded job execution system using a custom thread pool and shared task queue.
+        Implemented synchronization using mutexes and condition variables to ensure safe concurrent execution.
+        </p>
+        <p>
+        The system simulates production-style workloads where tasks must be processed reliably under concurrency,
+        highlighting challenges in scheduling, synchronization, and resource contention.
         </p>
         <a href="https://github.com/SaiKishore-hash/async-job-system-cpp" target="_blank">View Code →</a>
     </div>
 
-    <div class="card">
-        <h3>Drowsy Driver Detection System</h3>
+</section>
+
+<section>
+    <h2>Professional Experience</h2>
+
+    <div class="block">
+        <h3>ION Group — Product Engineer (FX Front Office)</h3>
         <p>
-            Computer vision-based system published in Springer.
-            Detects driver fatigue in real time using IoT + ML pipelines.
+        Built and scaled low-latency market connectivity systems for 40+ global financial institutions.
+        Designed unified APIs for real-time trading, market data, and drop copy workflows.
         </p>
-        <a href="https://link.springer.com/chapter/10.1007/978-981-99-6984-5_32" target="_blank">View Paper →</a>
-    </div>
-</section>
-
-<section id="writing">
-    <h2>Writing</h2>
-    <ul>
-        <li><a href="blog.html">How Order Matching Engines Work</a></li>
-    </ul>
-</section>
-
-<section id="experience">
-    <h2>Experience</h2>
-
-    <div class="exp">
-        <h3>ION Group — Product Engineer</h3>
         <p>
-            Built low-latency trading connectivity across 40+ financial institutions.
-            Designed APIs for market data, implemented FIX/SBE gateways, and reduced release cycles by 30%.
+        Engineered FIX and SBE-based gateways to support high-frequency data transfer across exchanges.
+        Reduced release cycles by 30% through automated regression systems and improved debugging workflows.
         </p>
     </div>
 
-    <div class="exp">
+    <div class="block">
         <h3>ION Group — Trading Operations Analyst</h3>
         <p>
-            Automated trading workflows, reduced operational time by 75%, and built NLP-based incident resolution tools.
-            Led production debugging and regulatory workflow delivery across global banks.
+        Automated end-of-day trading workflows, reducing execution time from 2 hours to 30 minutes.
+        Led production issue resolution across global clients, improving turnaround time by 75%.
+        </p>
+        <p>
+        Built an NLP-based semantic search system for incident management, enabling faster root cause
+        identification across large volumes of historical data.
+        </p>
+    </div>
+
+</section>
+
+<section>
+    <h2>Writing</h2>
+
+    <div class="block">
+        <h3><a href="blog.html">How Order Matching Engines Work</a></h3>
+        <p>
+        A breakdown of how trading systems process order flow, maintain fairness, and operate under latency constraints.
         </p>
     </div>
 </section>
 
-<section class="contact">
-    <h2>Contact</h2>
-    <p>Email: sai.kishore.atreya@gmail.com</p>
-    <p>
-        <a href="https://github.com/SaiKishore-hash" target="_blank">GitHub</a> |
-        <a href="https://www.linkedin.com/in/saikishore-0308/" target="_blank">LinkedIn</a>
-    </p>
-</section>
+<footer>
+    <p>© Sai Kishore</p>
+</footer>
 
 </div>
 
