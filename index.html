@@ -1,123 +1,84 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Sai Kishore</title>
-<link rel="stylesheet" href="style.css">
-<script>
-function toggle(id){
-    var x = document.getElementById(id);
-    x.style.display = x.style.display === "block" ? "none" : "block";
-}
-</script>
+    <title>Home Inventory</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#2563eb">
 </head>
 
 <body>
 
-<div class="container">
+<header>
+    <h1>🏠 Home Inventory</h1>
+</header>
 
-<!-- HERO -->
-<div class="hero">
-<h1>SAI KISHORE</h1>
-<p class="tag">Trading Systems • Quant Engines • Low Latency</p>
+<nav class="tabs">
+    <button class="tab-btn active" onclick="showTab('inventory', this)">Inventory</button>
+    <button class="tab-btn" onclick="showTab('shopping', this)">Shopping</button>
+    <button class="tab-btn" onclick="showTab('update', this)">Update Inventory</button>
+</nav>
 
-<p class="intro">
-Systems behave differently at the edges.
-I build systems to understand those edges.
-</p>
+<main>
 
-<div class="links">
-<a href="https://github.com/SaiKishore-hash">GitHub</a>
-<a href="https://www.linkedin.com/in/saikishore-0308/">LinkedIn</a>
-<a href="mailto:sai.kishore.atreya@gmail.com">Email</a>
-</div>
-</div>
-
-<!-- SYSTEMS -->
-<div class="section">
-<h2>SYSTEMS</h2>
-
-<div class="card" onclick="toggle('p1')">
-Quant Research Station
-</div>
-<div id="p1" class="content">
-Transforms natural language → quant strategy.  
-Real-time Sharpe + confidence modeling.  
-Latency-aware inference pipeline.
-<a href="https://quant-reseach-station.streamlit.app">Launch</a>
+<!-- INVENTORY -->
+<div id="inventory" class="tab">
+    <div class="card">
+        <h2>Inventory</h2>
+        <div id="inventoryList"></div>
+    </div>
 </div>
 
-<div class="card" onclick="toggle('p2')">
-BayesFX Engine
-</div>
-<div id="p2" class="content">
-Probabilistic FX system using Bayesian inference.  
-Focus: uncertainty, not prediction.
-<a href="https://bayesfx-agent.streamlit.app">Launch</a>
-</div>
+<!-- SHOPPING -->
+<div id="shopping" class="tab">
+    <div class="card">
+        <h2>Shopping List</h2>
 
-<div class="card" onclick="toggle('p3')">
-Order Matching Engine
-</div>
-<div id="p3" class="content">
-Exchange-style execution engine.  
-Price-time priority, partial fills, order flow simulation.
-<a href="https://github.com/SaiKishore-hash/ordermatchingengine">Code</a>
-</div>
+        <div class="row">
+            <input id="itemInput" placeholder="Add item">
+            <button class="primary" onclick="addItem()">Add</button>
+        </div>
 
-<div class="card" onclick="toggle('p4')">
-Async Job System
-</div>
-<div id="p4" class="content">
-Thread pool + task queue system.  
-Focus: concurrency, scheduling, system stability.
-<a href="https://github.com/SaiKishore-hash/async-job-system-cpp">Code</a>
+        <ul id="shoppingList"></ul>
+
+        <!-- ✅ CLEAR BUTTON -->
+        <button onclick="clearShopping()" class="cta">
+            Clear All
+        </button>
+
+    </div>
 </div>
 
+<!-- UPDATE INVENTORY -->
+<div id="update" class="tab">
+    <div class="card">
+        <h2>Update Inventory</h2>
+
+        <input id="item" placeholder="Item">
+        <input id="quantity" placeholder="Quantity">
+        <input id="unit" placeholder="Unit">
+
+        <select id="type">
+            <option value="stock">Stock</option>
+            <option value="consume">Consumed</option>
+        </select>
+        <p id="consumeNote" style="font-size:12px; color:#94a3b8; display:none;">
+            onsumption uses earliest expiry automatically
+        </p>
+
+        <label>Expected Expiry Date</label>
+        <input id="expiry" type="date">
+
+        <button id="submitBtn" class="cta" onclick="addEntry()">
+            Add to Inventory
+        </button>
+    </div>
 </div>
 
-<!-- RESEARCH -->
-<div class="section">
-<h2>RESEARCH</h2>
+</main>
 
-<div class="highlight">
-Springer Publication — Drowsy Driver Detection  
-Real-time system using IoT + vision pipelines  
-<a href="https://link.springer.com/chapter/10.1007/978-981-99-6984-5_32">Read Paper</a>
-</div>
-
-</div>
-
-<!-- THINKING -->
-<div class="section">
-<h2>THINKING</h2>
-
-<div class="note">
-Markets are not intelligent systems.  
-They are execution systems under constraints.
-</div>
-
-<div class="note">
-Latency is not just speed.  
-It changes behavior.
-</div>
-
-<div class="note">
-Most systems fail at edge cases, not averages.
-</div>
-
-</div>
-
-<!-- EXPERIENCE -->
-<div class="section">
-<h2>EXPERIENCE</h2>
-
-<div class="line">ION — Built low latency systems across 40+ institutions</div>
-<div class="line">Reduced release cycles by 30%</div>
-<div class="line">Automated workflows → 75% efficiency gain</div>
-
-</div>
-
-</div>
+<script type="module" src="script.js"></script>
 
 </body>
 </html>
