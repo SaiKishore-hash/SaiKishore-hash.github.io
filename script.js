@@ -38,7 +38,19 @@ window.addItem = async function() {
     input.value = "";
 };
 
-// 🔥 MILK UNIT AUTO LOCK
+// ---------- INVENTORY CLEAR ----------
+window.clearInventory = async function() {
+    const snapshot = await getDocs(collection(db, "inventory"));
+
+    const confirmClear = confirm("Are you sure you want to clear inventory?");
+    if (!confirmClear) return;
+
+    snapshot.forEach(async (docSnap) => {
+        await deleteDoc(doc(db, "inventory", docSnap.id));
+    });
+};
+
+// ---------- UI HELPERS ----------
 document.getElementById("item").addEventListener("input", () => {
     const item = document.getElementById("item").value.toLowerCase();
     const unitField = document.getElementById("unit");
@@ -51,24 +63,21 @@ document.getElementById("item").addEventListener("input", () => {
     }
 });
 
-// EXISTING
 document.getElementById("type").addEventListener("change", () => {
     const type = document.getElementById("type").value;
     const note = document.getElementById("consumeNote");
 
-    if (type === "consume") {
-        note.style.display = "block";
-    } else {
-        note.style.display = "none";
-    }
+    note.style.display = type === "consume" ? "block" : "none";
 });
 
+// ---------- SHOPPING VIEW ----------
 onSnapshot(shoppingRef, (snapshot) => {
     const list = document.getElementById("shoppingList");
     list.innerHTML = "";
 
     snapshot.forEach(docSnap => {
         const data = docSnap.data();
+
         const li = document.createElement("li");
 
         li.innerHTML = `
@@ -83,25 +92,14 @@ onSnapshot(shoppingRef, (snapshot) => {
 });
 
 window.toggleItem = async function(id, current) {
-    const ref = doc(db, "shopping", id);
-    await updateDoc(ref, { bought: !current });
+    await updateDoc(doc(db, "shopping", id), { bought: !current });
 };
 
 window.clearShopping = async function() {
     const snapshot = await getDocs(shoppingRef);
 
-    let allChecked = true;
-
-    snapshot.forEach(docSnap => {
-        if (!docSnap.data().bought) {
-            allChecked = false;
-        }
-    });
-
-    if (!allChecked) {
-        const confirmClear = confirm("Some items are not checked. Clear anyway?");
-        if (!confirmClear) return;
-    }
+    const confirmClear = confirm("Clear entire shopping list?");
+    if (!confirmClear) return;
 
     snapshot.forEach(async (docSnap) => {
         await deleteDoc(doc(db, "shopping", docSnap.id));
@@ -111,7 +109,6 @@ window.clearShopping = async function() {
 // ---------- INVENTORY ----------
 const inventoryRef = collection(db, "inventory");
 
-// ADD ENTRY
 window.addEntry = async function() {
     let item = document.getElementById("item").value.trim();
     let quantity = Number(document.getElementById("quantity").value);
@@ -163,10 +160,7 @@ onSnapshot(inventoryRef, (snapshot) => {
     snapshot.forEach(docSnap => {
         const data = docSnap.data();
 
-        if (!items[data.item]) {
-            items[data.item] = [];
-        }
-
+        if (!items[data.item]) items[data.item] = [];
         items[data.item].push(data);
     });
 
@@ -174,7 +168,6 @@ onSnapshot(inventoryRef, (snapshot) => {
 
         let batches = [];
 
-        // ✅ FIX APPLIED HERE (SORT BY TIMESTAMP)
         items[item]
             .sort((a, b) => a.timestamp - b.timestamp)
             .forEach(entry => {
@@ -210,15 +203,7 @@ onSnapshot(inventoryRef, (snapshot) => {
 
         const div = document.createElement("div");
         div.className = "item-card";
-        div.innerHTML = `<strong style="font-size:16px;">${item}</strong>`;
-
-        const totalQuantity = batches.reduce((sum, b) => sum + b.quantity, 0);
-        if (totalQuantity === 0) {
-            addDoc(collection(db, "shopping"), {
-                name: item,
-                bought: false
-            });
-        }
+        div.innerHTML = `<strong>${item}</strong>`;
 
         batches.forEach(batch => {
             const today = new Date();
@@ -247,6 +232,5 @@ onSnapshot(inventoryRef, (snapshot) => {
 
 // SERVICE WORKER
 if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("service-worker.js")
-    .then(() => console.log("Service Worker Registered"));
+  navigator.serviceWorker.register("service-worker.js");
 }
