@@ -38,7 +38,7 @@ window.addItem = async function() {
     input.value = "";
 };
 
-// 🔥 NEW: MILK UNIT AUTO LOCK
+// 🔥 MILK UNIT AUTO LOCK
 document.getElementById("item").addEventListener("input", () => {
     const item = document.getElementById("item").value.toLowerCase();
     const unitField = document.getElementById("unit");
@@ -174,42 +174,44 @@ onSnapshot(inventoryRef, (snapshot) => {
 
         let batches = [];
 
-        items[item].forEach(entry => {
+        // ✅ FIX APPLIED HERE (SORT BY TIMESTAMP)
+        items[item]
+            .sort((a, b) => a.timestamp - b.timestamp)
+            .forEach(entry => {
 
-            if (entry.type === "stock") {
-                batches.push({
-                    quantity: entry.quantity,
-                    expiry: entry.expiry,
-                    unit: entry.unit
-                });
-            }
-
-            if (entry.type === "consume") {
-                let remaining = entry.quantity;
-
-                batches.sort((a, b) => new Date(a.expiry) - new Date(b.expiry));
-
-                for (let batch of batches) {
-                    if (remaining <= 0) break;
-
-                    if (batch.quantity <= remaining) {
-                        remaining -= batch.quantity;
-                        batch.quantity = 0;
-                    } else {
-                        batch.quantity -= remaining;
-                        remaining = 0;
-                    }
+                if (entry.type === "stock") {
+                    batches.push({
+                        quantity: entry.quantity,
+                        expiry: entry.expiry,
+                        unit: entry.unit
+                    });
                 }
 
-                batches = batches.filter(b => b.quantity > 0);
-            }
-        });
+                if (entry.type === "consume") {
+                    let remaining = entry.quantity;
+
+                    batches.sort((a, b) => new Date(a.expiry) - new Date(b.expiry));
+
+                    for (let batch of batches) {
+                        if (remaining <= 0) break;
+
+                        if (batch.quantity <= remaining) {
+                            remaining -= batch.quantity;
+                            batch.quantity = 0;
+                        } else {
+                            batch.quantity -= remaining;
+                            remaining = 0;
+                        }
+                    }
+
+                    batches = batches.filter(b => b.quantity > 0);
+                }
+            });
 
         const div = document.createElement("div");
         div.className = "item-card";
         div.innerHTML = `<strong style="font-size:16px;">${item}</strong>`;
 
-        // 🔥 NEW: AUTO LOW STOCK → SHOPPING
         const totalQuantity = batches.reduce((sum, b) => sum + b.quantity, 0);
         if (totalQuantity === 0) {
             addDoc(collection(db, "shopping"), {
@@ -226,7 +228,6 @@ onSnapshot(inventoryRef, (snapshot) => {
             const p = document.createElement("div");
             p.className = "batch";
 
-            // 🔥 NEW: SMART EXPIRY TEXT
             if (days < 0) {
                 p.innerHTML = `🔴 ${batch.quantity} ${batch.unit} (EXPIRED)`;
             } else if (days <= 1) {
@@ -243,6 +244,8 @@ onSnapshot(inventoryRef, (snapshot) => {
         container.appendChild(div);
     });
 });
+
+// SERVICE WORKER
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("service-worker.js")
     .then(() => console.log("Service Worker Registered"));
