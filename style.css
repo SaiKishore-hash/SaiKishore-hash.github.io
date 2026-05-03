@@ -128,3 +128,32 @@ input, select {
     margin-left: 10px;
     font-size: 14px;
 }
+.inventory-layout {
+    display: flex;
+    gap: 15px;
+}
+
+.add-panel {
+    width: 40%;
+}
+
+.inventory-table {
+    width: 60%;
+}
+
+.inventory-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 40px 40px;
+    gap: 8px;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+.inventory-row button {
+    background: #2563eb;
+    border: none;
+    color: white;
+    border-radius: 50%;
+    height: 35px;
+    width: 35px;
+}

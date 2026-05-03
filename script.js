@@ -1,5 +1,4 @@
 import { db } from "./firebase.js";
-
 import {
     collection,
     addDoc,
@@ -21,13 +20,12 @@ window.showTab = function(tab, btn) {
 
 window.onload = () => showTab('inventory');
 
-// ---------- SHOPPING ----------
+// ---------- SHOPPING (UNCHANGED) ----------
 const shoppingRef = collection(db, "shopping");
 
 window.addItem = async function() {
     const input = document.getElementById("itemInput");
     const value = input.value.trim();
-
     if (!value) return;
 
     await addDoc(shoppingRef, {
@@ -38,46 +36,12 @@ window.addItem = async function() {
     input.value = "";
 };
 
-// ---------- INVENTORY CLEAR ----------
-window.clearInventory = async function() {
-    const snapshot = await getDocs(collection(db, "inventory"));
-
-    const confirmClear = confirm("Are you sure you want to clear inventory?");
-    if (!confirmClear) return;
-
-    snapshot.forEach(async (docSnap) => {
-        await deleteDoc(doc(db, "inventory", docSnap.id));
-    });
-};
-
-// ---------- UI HELPERS ----------
-document.getElementById("item").addEventListener("input", () => {
-    const item = document.getElementById("item").value.toLowerCase();
-    const unitField = document.getElementById("unit");
-
-    if (item === "milk") {
-        unitField.value = "packets";
-        unitField.disabled = true;
-    } else {
-        unitField.disabled = false;
-    }
-});
-
-document.getElementById("type").addEventListener("change", () => {
-    const type = document.getElementById("type").value;
-    const note = document.getElementById("consumeNote");
-
-    note.style.display = type === "consume" ? "block" : "none";
-});
-
-// ---------- SHOPPING VIEW ----------
 onSnapshot(shoppingRef, (snapshot) => {
     const list = document.getElementById("shoppingList");
     list.innerHTML = "";
 
     snapshot.forEach(docSnap => {
         const data = docSnap.data();
-
         const li = document.createElement("li");
 
         li.innerHTML = `
@@ -97,9 +61,7 @@ window.toggleItem = async function(id, current) {
 
 window.clearShopping = async function() {
     const snapshot = await getDocs(shoppingRef);
-
-    const confirmClear = confirm("Clear entire shopping list?");
-    if (!confirmClear) return;
+    if (!confirm("Clear entire shopping list?")) return;
 
     snapshot.forEach(async (docSnap) => {
         await deleteDoc(doc(db, "shopping", docSnap.id));
@@ -109,128 +71,78 @@ window.clearShopping = async function() {
 // ---------- INVENTORY ----------
 const inventoryRef = collection(db, "inventory");
 
-window.addEntry = async function() {
-    let item = document.getElementById("item").value.trim();
-    let quantity = Number(document.getElementById("quantity").value);
-    let unit = document.getElementById("unit").value.trim();
-    const type = document.getElementById("type").value;
-    const expiry = document.getElementById("expiry").value;
+// unit step rules
+function getStep(unit) {
+    if (unit === "kg") return 0.1;
+    if (unit === "grams") return 50;
+    if (unit === "packets") return 1;
+    if (unit === "nos") return 1;
+    return 1;
+}
+
+// add item
+window.addItemToInventory = async function() {
+    const item = document.getElementById("item").value.trim().toLowerCase();
+    const quantity = Number(document.getElementById("quantity").value);
+    const unit = document.getElementById("unit").value;
 
     if (!item || !quantity) {
         alert("Fill all fields");
         return;
     }
 
-    if (item.toLowerCase() === "milk") {
-        unit = "packets";
-    }
-
-    if (!unit) {
-        alert("Unit required");
-        return;
-    }
-
-    if (type === "stock" && !expiry) {
-        alert("Expiry required");
-        return;
-    }
-
     await addDoc(inventoryRef, {
-        item: item.toLowerCase(),
+        item,
         quantity,
-        unit,
-        type,
-        expiry: type === "stock" ? expiry : null,
-        timestamp: Date.now()
+        unit
     });
 
     document.getElementById("item").value = "";
     document.getElementById("quantity").value = "";
-    document.getElementById("unit").value = "";
-    document.getElementById("expiry").value = "";
 };
 
-// ---------- INVENTORY VIEW ----------
+// increment / decrement
+window.updateQty = async function(id, unit, currentQty, direction) {
+    const step = getStep(unit);
+    let newQty = currentQty + (direction * step);
+
+    if (newQty < 0) newQty = 0;
+
+    await updateDoc(doc(db, "inventory", id), {
+        quantity: Number(newQty.toFixed(2))
+    });
+};
+
+// clear inventory
+window.clearInventory = async function() {
+    const snapshot = await getDocs(inventoryRef);
+    if (!confirm("Clear entire inventory?")) return;
+
+    snapshot.forEach(async (docSnap) => {
+        await deleteDoc(doc(db, "inventory", docSnap.id));
+    });
+};
+
+// render inventory
 onSnapshot(inventoryRef, (snapshot) => {
     const container = document.getElementById("inventoryList");
     container.innerHTML = "";
 
-    const items = {};
-
     snapshot.forEach(docSnap => {
         const data = docSnap.data();
 
-        if (!items[data.item]) items[data.item] = [];
-        items[data.item].push(data);
-    });
+        const row = document.createElement("div");
+        row.className = "inventory-row";
 
-    Object.keys(items).forEach(item => {
+        row.innerHTML = `
+            <span>${data.item}</span>
+            <span>${data.quantity}</span>
+            <span>${data.unit}</span>
 
-        let batches = [];
+            <button onclick="updateQty('${docSnap.id}','${data.unit}',${data.quantity},1)">+</button>
+            <button onclick="updateQty('${docSnap.id}','${data.unit}',${data.quantity},-1)">-</button>
+        `;
 
-        items[item]
-            .sort((a, b) => a.timestamp - b.timestamp)
-            .forEach(entry => {
-
-                if (entry.type === "stock") {
-                    batches.push({
-                        quantity: entry.quantity,
-                        expiry: entry.expiry,
-                        unit: entry.unit
-                    });
-                }
-
-                if (entry.type === "consume") {
-                    let remaining = entry.quantity;
-
-                    batches.sort((a, b) => new Date(a.expiry) - new Date(b.expiry));
-
-                    for (let batch of batches) {
-                        if (remaining <= 0) break;
-
-                        if (batch.quantity <= remaining) {
-                            remaining -= batch.quantity;
-                            batch.quantity = 0;
-                        } else {
-                            batch.quantity -= remaining;
-                            remaining = 0;
-                        }
-                    }
-
-                    batches = batches.filter(b => b.quantity > 0);
-                }
-            });
-
-        const div = document.createElement("div");
-        div.className = "item-card";
-        div.innerHTML = `<strong>${item}</strong>`;
-
-        batches.forEach(batch => {
-            const today = new Date();
-            const exp = new Date(batch.expiry);
-            const days = Math.ceil((exp - today) / (1000 * 60 * 60 * 24));
-
-            const p = document.createElement("div");
-            p.className = "batch";
-
-            if (days < 0) {
-                p.innerHTML = `🔴 ${batch.quantity} ${batch.unit} (EXPIRED)`;
-            } else if (days <= 1) {
-                p.innerHTML = `⚠️ ${batch.quantity} ${batch.unit} (Use today/tomorrow)`;
-            } else if (days <= 2) {
-                p.innerHTML = `🟡 ${batch.quantity} ${batch.unit} (${days} days left)`;
-            } else {
-                p.innerHTML = `🟢 ${batch.quantity} ${batch.unit} (${days} days left)`;
-            }
-
-            div.appendChild(p);
-        });
-
-        container.appendChild(div);
+        container.appendChild(row);
     });
 });
-
-// SERVICE WORKER
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("service-worker.js");
-}

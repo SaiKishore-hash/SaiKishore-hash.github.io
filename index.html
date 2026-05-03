@@ -4,8 +4,6 @@
     <title>Home Inventory</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#2563eb">
 </head>
 
 <body>
@@ -17,7 +15,6 @@
 <nav class="tabs">
     <button class="tab-btn active" onclick="showTab('inventory', this)">Inventory</button>
     <button class="tab-btn" onclick="showTab('shopping', this)">Shopping</button>
-    <button class="tab-btn" onclick="showTab('update', this)">Update Inventory</button>
 </nav>
 
 <main>
@@ -25,18 +22,38 @@
 <!-- INVENTORY -->
 <div id="inventory" class="tab">
     <div class="card">
-        <h2>Inventory</h2>
-        <div id="inventoryList"></div>
 
-        <!-- ✅ NEW CLEAR INVENTORY BUTTON -->
-        <button onclick="clearInventory()" class="cta">
-            Clear Inventory
-        </button>
+        <h2>Inventory</h2>
+
+        <div class="inventory-layout">
+
+            <!-- LEFT PANEL -->
+            <div class="add-panel">
+                <h3>Add Item</h3>
+
+                <input id="item" placeholder="Item">
+                <input id="quantity" type="number" placeholder="Quantity">
+
+                <select id="unit">
+                    <option value="kg">kgs</option>
+                    <option value="grams">grams</option>
+                    <option value="packets">packets</option>
+                    <option value="nos">nos</option>
+                </select>
+
+                <button class="cta" onclick="addItemToInventory()">Add to Inventory</button>
+                <button class="cta" onclick="clearInventory()">Clear All</button>
+            </div>
+
+            <!-- RIGHT PANEL -->
+            <div id="inventoryList" class="inventory-table"></div>
+
+        </div>
 
     </div>
 </div>
 
-<!-- SHOPPING -->
+<!-- SHOPPING (UNCHANGED) -->
 <div id="shopping" class="tab">
     <div class="card">
         <h2>Shopping List</h2>
@@ -50,34 +67,6 @@
 
         <button onclick="clearShopping()" class="cta">
             Clear All
-        </button>
-
-    </div>
-</div>
-
-<!-- UPDATE INVENTORY -->
-<div id="update" class="tab">
-    <div class="card">
-        <h2>Update Inventory</h2>
-
-        <input id="item" placeholder="Item">
-        <input id="quantity" placeholder="Quantity">
-        <input id="unit" placeholder="Unit">
-
-        <select id="type">
-            <option value="stock">Stock</option>
-            <option value="consume">Consumed</option>
-        </select>
-
-        <p id="consumeNote" style="font-size:12px; color:#94a3b8; display:none;">
-            Consumption uses earliest expiry automatically
-        </p>
-
-        <label>Expected Expiry Date</label>
-        <input id="expiry" type="date">
-
-        <button id="submitBtn" class="cta" onclick="addEntry()">
-            Add to Inventory
         </button>
     </div>
 </div>
