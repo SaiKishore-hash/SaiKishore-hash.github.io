@@ -135,12 +135,14 @@ onSnapshot(inventoryRef, (snapshot) => {
         row.className = "inventory-row";
 
         row.innerHTML = `
-            <span>${data.item}</span>
-            <span>${data.quantity}</span>
-            <span>${data.unit}</span>
+            <div class="col item">${data.item}</div>
+            <div class="col qty">${data.quantity}</div>
+            <div class="col unit">${data.unit}</div>
 
-            <button onclick="updateQty('${docSnap.id}','${data.unit}',${data.quantity},1)">+</button>
-            <button onclick="updateQty('${docSnap.id}','${data.unit}',${data.quantity},-1)">-</button>
+            <div class="col actions">
+                <button onclick="updateQty('${docSnap.id}','${data.unit}',${data.quantity},1)">+</button>
+                <button onclick="updateQty('${docSnap.id}','${data.unit}',${data.quantity},-1)">-</button>
+            </div>
         `;
 
         container.appendChild(row);

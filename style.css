@@ -10,9 +10,9 @@ body {
 }
 
 main {
-    max-width: 500px;
+    max-width: 900px; /* 🔥 increased width */
     margin: auto;
-    padding: 10px;
+    padding: 15px;
 }
 
 header {
@@ -52,7 +52,7 @@ h1, h2 {
 
 input, select {
     width: 100%;
-    padding: 16px;
+    padding: 14px;
     margin: 10px 0;
     border-radius: 12px;
     border: none;
@@ -60,7 +60,7 @@ input, select {
     color: white;
 }
 
-/* 🔥 FIXED ALIGNMENT WITHOUT BREAKING BUTTON */
+/* SHOPPING ROW */
 .row {
     display: flex;
     gap: 10px;
@@ -74,6 +74,7 @@ input, select {
     min-width: 80px;
 }
 
+/* BUTTONS */
 .primary {
     background: #2563eb;
     color: white;
@@ -84,31 +85,17 @@ input, select {
 
 .cta {
     width: 100%;
-    height: 56px;
+    height: 52px;
     background: #22c55e;
     color: white;
     border: none;
-    margin-top: 15px;
-    border-radius: 14px; /* ✅ FIX */
-    font-weight: bold;
-    font-size: 16px;
-}
-
-.item-card {
-    background: #0f172a;
+    margin-top: 12px;
     border-radius: 12px;
-    padding: 12px;
-    margin-bottom: 12px;
+    font-weight: bold;
+    font-size: 15px;
 }
 
-.expiring {
-    color: #f59e0b;
-}
-
-.expired {
-    color: #ef4444;
-}
-/* ✅ SHOPPING LIST ALIGNMENT FIX */
+/* SHOPPING LIST */
 #shoppingList li {
     display: flex;
     align-items: center;
@@ -120,40 +107,94 @@ input, select {
     height: 18px;
 }
 
-#shoppingList span {
-    display: inline-block;
-}
-.batch {
-    margin-top: 6px;
-    margin-left: 10px;
-    font-size: 14px;
-}
+/* ---------------------- */
+/* INVENTORY LAYOUT FIXED */
+/* ---------------------- */
+
 .inventory-layout {
     display: flex;
-    gap: 15px;
+    gap: 25px;
+    margin-top: 20px;
 }
 
+/* LEFT PANEL */
 .add-panel {
-    width: 40%;
+    width: 35%;
+    min-width: 250px;
 }
 
+/* RIGHT PANEL */
 .inventory-table {
-    width: 60%;
+    width: 65%;
 }
 
+/* INVENTORY ROW */
 .inventory-row {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 40px 40px;
-    gap: 8px;
-    margin-bottom: 10px;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
     align-items: center;
+    padding: 12px 8px;
+    border-bottom: 1px solid #334155;
 }
 
+/* COLUMN STYLES */
+.col {
+    text-align: center;
+    font-size: 14px;
+}
+
+.col.item {
+    text-align: left;
+    font-weight: 500;
+    padding-left: 5px;
+}
+
+/* ACTION BUTTON GROUP */
+.actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* BUTTON STYLE */
 .inventory-row button {
     background: #2563eb;
     border: none;
     color: white;
     border-radius: 50%;
-    height: 35px;
-    width: 35px;
+    height: 38px;
+    width: 38px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* HOVER EFFECT */
+.inventory-row button:hover {
+    background: #1d4ed8;
+}
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 700px) {
+    main {
+        max-width: 100%;
+    }
+
+    .inventory-layout {
+        flex-direction: column;
+    }
+
+    .add-panel,
+    .inventory-table {
+        width: 100%;
+    }
+
+    .inventory-row {
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+        font-size: 13px;
+    }
+
+    .inventory-row button {
+        height: 34px;
+        width: 34px;
+    }
 }
