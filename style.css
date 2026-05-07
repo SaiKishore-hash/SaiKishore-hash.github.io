@@ -150,22 +150,26 @@ select {
 }
 
 /* INVENTORY CARD */
+/* INVENTORY CARD */
 .inventory-card {
-    background: #0f172a;
     border-radius: 16px;
     padding: 16px;
+    transition: 0.2s ease;
 }
 
+/* HEALTHY */
 .inventory-card.healthy {
-    border-left: 6px solid #22c55e;
+    background: #14532d;
 }
 
+/* LOW */
 .inventory-card.low {
-    border-left: 6px solid #f59e0b;
+    background: #78350f;
 }
 
+/* EMPTY */
 .inventory-card.empty {
-    border-left: 6px solid #ef4444;
+    background: #7f1d1d;
 }
 
 .card-top {
