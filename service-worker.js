@@ -1,46 +1,85 @@
-const CACHE_NAME = "inventory-app-v2";
+const CACHE_NAME = "inventory-app-v5";
 
 const urlsToCache = [
-  "./",
-  "./index.html",
-  "./style.css",
-  "./script.js",
-  "./firebase.js"
+    "./",
+    "./index.html",
+    "./style.css",
+    "./script.js",
+    "./firebase.js",
+    "./manifest.json"
 ];
 
-self.addEventListener("install", event => {
+// INSTALL
+self.addEventListener("install", (event) => {
 
-  self.skipWaiting();
+    self.skipWaiting();
 
-  event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(cache => cache.addAll(urlsToCache))
-  );
+    event.waitUntil(
+        caches.open(CACHE_NAME)
+            .then(cache => cache.addAll(urlsToCache))
+    );
 });
 
-self.addEventListener("activate", event => {
+// ACTIVATE
+self.addEventListener("activate", (event) => {
 
-  event.waitUntil(
-    caches.keys().then(keys => {
+    event.waitUntil(
 
-      return Promise.all(
-        keys.map(key => {
+        caches.keys().then(keys => {
 
-          if (key !== CACHE_NAME) {
-            return caches.delete(key);
-          }
+            return Promise.all(
+
+                keys.map(key => {
+
+                    if (key !== CACHE_NAME) {
+                        return caches.delete(key);
+                    }
+
+                })
+
+            );
+
         })
-      );
-    })
-  );
 
-  self.clients.claim();
+    );
+
+    self.clients.claim();
 });
 
-self.addEventListener("fetch", event => {
+// FETCH
+self.addEventListener("fetch", (event) => {
 
-  event.respondWith(
-    fetch(event.request)
-      .catch(() => caches.match(event.request))
-  );
+    // ALWAYS FETCH LATEST JS/CSS
+    if (
+        event.request.url.includes(".js") ||
+        event.request.url.includes(".css") ||
+        event.request.url.includes("index.html")
+    ) {
+
+        event.respondWith(
+
+            fetch(event.request)
+                .then(response => {
+
+                    const responseClone = response.clone();
+
+                    caches.open(CACHE_NAME)
+                        .then(cache => {
+                            cache.put(event.request, responseClone);
+                        });
+
+                    return response;
+                })
+                .catch(() => caches.match(event.request))
+
+        );
+
+        return;
+    }
+
+    // NORMAL CACHE
+    event.respondWith(
+        caches.match(event.request)
+            .then(response => response || fetch(event.request))
+    );
 });
