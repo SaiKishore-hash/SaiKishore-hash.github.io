@@ -188,7 +188,7 @@ window.clearInventory = async function() {
     });
 };
 
-// ---------- RENDER ----------
+// ---------- INVENTORY RENDER ----------
 onSnapshot(inventoryRef, (snapshot) => {
 
     const container = document.getElementById("inventoryList");
@@ -264,6 +264,94 @@ onSnapshot(inventoryRef, (snapshot) => {
 
         container.appendChild(card);
     });
+});
+
+// ---------- PURCHASES ----------
+const purchasesRef = collection(db, "purchases");
+
+window.addPurchase = async function() {
+
+    const item = document.getElementById("purchaseItem").value.trim();
+
+    const quantity = document.getElementById("purchaseQty").value.trim();
+
+    const cost = document.getElementById("purchaseCost").value.trim();
+
+    const store = document.getElementById("purchaseStore").value.trim();
+
+    const date = document.getElementById("purchaseDate").value;
+
+    if (!item || !quantity || !cost || !store || !date) {
+
+        alert("Fill all purchase fields");
+
+        return;
+    }
+
+    await addDoc(purchasesRef, {
+        item,
+        quantity,
+        cost,
+        store,
+        date,
+        timestamp: Date.now()
+    });
+
+    document.getElementById("purchaseItem").value = "";
+    document.getElementById("purchaseQty").value = "";
+    document.getElementById("purchaseCost").value = "";
+    document.getElementById("purchaseStore").value = "";
+};
+
+onSnapshot(purchasesRef, (snapshot) => {
+
+    const container = document.getElementById("purchaseList");
+
+    container.innerHTML = "";
+
+    const grouped = {};
+
+    snapshot.forEach(docSnap => {
+
+        const data = docSnap.data();
+
+        if (!grouped[data.date]) {
+            grouped[data.date] = [];
+        }
+
+        grouped[data.date].push(data);
+    });
+
+    Object.keys(grouped)
+        .sort((a, b) => new Date(b) - new Date(a))
+        .forEach(date => {
+
+            const section = document.createElement("div");
+
+            section.className = "purchase-section";
+
+            section.innerHTML = `
+                <div class="purchase-date">
+                    ${date}
+                </div>
+            `;
+
+            grouped[date].forEach(item => {
+
+                const row = document.createElement("div");
+
+                row.className = "purchase-row";
+
+                row.innerHTML = `
+                    • ${item.item} - ${item.quantity}
+                    - ₹${item.cost} - ${item.store}
+                `;
+
+                section.appendChild(row);
+            });
+
+            container.appendChild(section);
+        });
 });
 
 // ---------- SERVICE WORKER ----------

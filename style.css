@@ -150,24 +150,20 @@ select {
 }
 
 /* INVENTORY CARD */
-/* INVENTORY CARD */
 .inventory-card {
     border-radius: 16px;
     padding: 16px;
     transition: 0.2s ease;
 }
 
-/* HEALTHY */
 .inventory-card.healthy {
     background: #14532d;
 }
 
-/* LOW */
 .inventory-card.low {
     background: #78350f;
 }
 
-/* EMPTY */
 .inventory-card.empty {
     background: #7f1d1d;
 }
@@ -186,7 +182,7 @@ select {
 
 .updated {
     font-size: 11px;
-    color: #94a3b8;
+    color: #d1d5db;
 }
 
 .quantity-display {
@@ -211,6 +207,27 @@ select {
     background: #2563eb;
     color: white;
     font-size: 24px;
+}
+
+/* PURCHASES */
+.purchase-section {
+    margin-top: 25px;
+    border-top: 1px solid #334155;
+    padding-top: 15px;
+}
+
+.purchase-date {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.purchase-row {
+    background: #0f172a;
+    padding: 12px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    line-height: 1.5;
 }
 
 /* MOBILE */

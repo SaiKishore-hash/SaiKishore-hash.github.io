@@ -26,6 +26,10 @@
     <button class="tab-btn" onclick="showTab('shopping', this)">
         Shopping
     </button>
+
+    <button class="tab-btn" onclick="showTab('purchases', this)">
+        Purchases
+    </button>
 </nav>
 
 <main>
@@ -106,6 +110,37 @@
         <button onclick="clearShopping()" class="cta">
             Clear All
         </button>
+
+    </div>
+
+</div>
+
+<!-- PURCHASES -->
+<div id="purchases" class="tab">
+
+    <div class="card">
+
+        <h2>Purchases</h2>
+
+        <div class="purchase-form">
+
+            <input id="purchaseItem" placeholder="Item">
+
+            <input id="purchaseQty" placeholder="Quantity (example: 2 packets)">
+
+            <input id="purchaseCost" placeholder="Cost">
+
+            <input id="purchaseStore" placeholder="Store">
+
+            <input id="purchaseDate" type="date">
+
+            <button class="cta" onclick="addPurchase()">
+                Add Purchase
+            </button>
+
+        </div>
+
+        <div id="purchaseList"></div>
 
     </div>
 
