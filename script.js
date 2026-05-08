@@ -64,6 +64,24 @@ window.addItem = async function() {
     input.value = "";
 };
 
+window.editShoppingItem = async function(id, currentName) {
+
+    const newName = prompt("Edit item", currentName);
+
+    if (!newName) return;
+
+    await updateDoc(doc(db, "shopping", id), {
+        name: newName.toLowerCase()
+    });
+};
+
+window.deleteShoppingItem = async function(id) {
+
+    if (!confirm("Delete shopping item?")) return;
+
+    await deleteDoc(doc(db, "shopping", id));
+};
+
 onSnapshot(shoppingRef, (snapshot) => {
 
     const list = document.getElementById("shoppingList");
@@ -77,11 +95,27 @@ onSnapshot(shoppingRef, (snapshot) => {
         const li = document.createElement("li");
 
         li.innerHTML = `
-            <input type="checkbox"
-            ${data.bought ? "checked" : ""}
-            onchange="toggleItem('${docSnap.id}', ${data.bought})">
+            <div class="shopping-left">
 
-            <span>${data.name}</span>
+                <input type="checkbox"
+                ${data.bought ? "checked" : ""}
+                onchange="toggleItem('${docSnap.id}', ${data.bought})">
+
+                <span>${data.name}</span>
+
+            </div>
+
+            <div class="mini-actions">
+
+                <button onclick="editShoppingItem('${docSnap.id}','${data.name}')">
+                    ✏️
+                </button>
+
+                <button onclick="deleteShoppingItem('${docSnap.id}')">
+                    🗑
+                </button>
+
+            </div>
         `;
 
         list.appendChild(li);
@@ -110,7 +144,6 @@ window.clearShopping = async function() {
 // ---------- INVENTORY ----------
 const inventoryRef = collection(db, "inventory");
 
-// ---------- STEP RULES ----------
 function getStep(unit) {
 
     if (unit === "kg") return 0.1;
@@ -124,7 +157,6 @@ function getStep(unit) {
     return 1;
 }
 
-// ---------- ADD ITEM ----------
 window.addItemToInventory = async function() {
 
     const item = document.getElementById("item")
@@ -155,7 +187,6 @@ window.addItemToInventory = async function() {
     document.getElementById("quantity").value = "";
 };
 
-// ---------- UPDATE QTY ----------
 window.updateQty = async function(
     id,
     unit,
@@ -175,7 +206,37 @@ window.updateQty = async function(
     });
 };
 
-// ---------- CLEAR INVENTORY ----------
+window.editInventoryItem = async function(
+    id,
+    currentItem,
+    currentQty,
+    currentUnit
+) {
+
+    const newItem = prompt("Edit item", currentItem);
+    if (!newItem) return;
+
+    const newQty = prompt("Edit quantity", currentQty);
+    if (!newQty) return;
+
+    const newUnit = prompt("Edit unit", currentUnit);
+    if (!newUnit) return;
+
+    await updateDoc(doc(db, "inventory", id), {
+        item: newItem.toLowerCase(),
+        quantity: Number(newQty),
+        unit: newUnit,
+        updatedAt: Date.now()
+    });
+};
+
+window.deleteInventoryItem = async function(id) {
+
+    if (!confirm("Delete inventory item?")) return;
+
+    await deleteDoc(doc(db, "inventory", id));
+};
+
 window.clearInventory = async function() {
 
     const snapshot = await getDocs(inventoryRef);
@@ -188,7 +249,6 @@ window.clearInventory = async function() {
     });
 };
 
-// ---------- INVENTORY RENDER ----------
 onSnapshot(inventoryRef, (snapshot) => {
 
     const container = document.getElementById("inventoryList");
@@ -260,6 +320,27 @@ onSnapshot(inventoryRef, (snapshot) => {
                 </button>
 
             </div>
+
+            <div class="mini-actions inventory-mini-actions">
+
+                <button onclick="
+                    editInventoryItem(
+                        '${docSnap.id}',
+                        '${data.item}',
+                        ${data.quantity},
+                        '${data.unit}'
+                    )
+                ">
+                    ✏️
+                </button>
+
+                <button onclick="
+                    deleteInventoryItem('${docSnap.id}')
+                ">
+                    🗑
+                </button>
+
+            </div>
         `;
 
         container.appendChild(card);
@@ -303,6 +384,46 @@ window.addPurchase = async function() {
     document.getElementById("purchaseStore").value = "";
 };
 
+window.editPurchase = async function(
+    id,
+    item,
+    quantity,
+    cost,
+    store,
+    date
+) {
+
+    const newItem = prompt("Edit item", item);
+    if (!newItem) return;
+
+    const newQuantity = prompt("Edit quantity", quantity);
+    if (!newQuantity) return;
+
+    const newCost = prompt("Edit cost", cost);
+    if (!newCost) return;
+
+    const newStore = prompt("Edit store", store);
+    if (!newStore) return;
+
+    const newDate = prompt("Edit date (YYYY-MM-DD)", date);
+    if (!newDate) return;
+
+    await updateDoc(doc(db, "purchases", id), {
+        item: newItem,
+        quantity: newQuantity,
+        cost: newCost,
+        store: newStore,
+        date: newDate
+    });
+};
+
+window.deletePurchase = async function(id) {
+
+    if (!confirm("Delete purchase?")) return;
+
+    await deleteDoc(doc(db, "purchases", id));
+};
+
 onSnapshot(purchasesRef, (snapshot) => {
 
     const container = document.getElementById("purchaseList");
@@ -319,7 +440,10 @@ onSnapshot(purchasesRef, (snapshot) => {
             grouped[data.date] = [];
         }
 
-        grouped[data.date].push(data);
+        grouped[data.date].push({
+            id: docSnap.id,
+            ...data
+        });
     });
 
     Object.keys(grouped)
@@ -343,8 +467,33 @@ onSnapshot(purchasesRef, (snapshot) => {
                 row.className = "purchase-row";
 
                 row.innerHTML = `
-                    • ${item.item} - ${item.quantity}
-                    - ₹${item.cost} - ${item.store}
+                    <div>
+                        • ${item.item} - ${item.quantity}
+                        - ₹${item.cost} - ${item.store}
+                    </div>
+
+                    <div class="mini-actions">
+
+                        <button onclick="
+                            editPurchase(
+                                '${item.id}',
+                                '${item.item}',
+                                '${item.quantity}',
+                                '${item.cost}',
+                                '${item.store}',
+                                '${item.date}'
+                            )
+                        ">
+                            ✏️
+                        </button>
+
+                        <button onclick="
+                            deletePurchase('${item.id}')
+                        ">
+                            🗑
+                        </button>
+
+                    </div>
                 `;
 
                 section.appendChild(row);
@@ -360,10 +509,9 @@ if ("serviceWorker" in navigator) {
     window.addEventListener("load", async () => {
 
         const registration = await navigator.serviceWorker.register(
-            "./service-worker.js?v=7"
+            "./service-worker.js?v=9"
         );
 
-        // FORCE UPDATE CHECK
         registration.update();
 
     });

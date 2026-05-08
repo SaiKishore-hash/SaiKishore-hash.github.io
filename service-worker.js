@@ -1,4 +1,4 @@
-const CACHE_NAME = "inventory-app-v7";
+const CACHE_NAME = "inventory-app-v8";
 
 const urlsToCache = [
     "./",
@@ -9,7 +9,6 @@ const urlsToCache = [
     "./manifest.json"
 ];
 
-// INSTALL
 self.addEventListener("install", (event) => {
 
     self.skipWaiting();
@@ -20,7 +19,6 @@ self.addEventListener("install", (event) => {
     );
 });
 
-// ACTIVATE
 self.addEventListener("activate", (event) => {
 
     event.waitUntil(
@@ -46,10 +44,8 @@ self.addEventListener("activate", (event) => {
     self.clients.claim();
 });
 
-// FETCH
 self.addEventListener("fetch", (event) => {
 
-    // ALWAYS FETCH LATEST JS/CSS
     if (
         event.request.url.includes(".js") ||
         event.request.url.includes(".css") ||
@@ -77,7 +73,6 @@ self.addEventListener("fetch", (event) => {
         return;
     }
 
-    // NORMAL CACHE
     event.respondWith(
         caches.match(event.request)
             .then(response => response || fetch(event.request))
