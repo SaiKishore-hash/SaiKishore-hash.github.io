@@ -357,6 +357,14 @@ onSnapshot(purchasesRef, (snapshot) => {
 // ---------- SERVICE WORKER ----------
 if ("serviceWorker" in navigator) {
 
-    navigator.serviceWorker
-        .register("./service-worker.js");
+    window.addEventListener("load", async () => {
+
+        const registration = await navigator.serviceWorker.register(
+            "./service-worker.js?v=7"
+        );
+
+        // FORCE UPDATE CHECK
+        registration.update();
+
+    });
 }
